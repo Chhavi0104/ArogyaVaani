@@ -1,0 +1,29 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - symptom_check
+  - emergency
+  - language_select
+
+responses:
+  utter_greet:
+    - text: "Hello! How can I assist you today?"
+    - text: "नमस्ते! मैं आपकी कैसे मदद कर सकता हूँ?"
+
+  utter_goodbye:
+    - text: "Take care! Stay healthy."
+    - text: "ध्यान रखें! स्वस्थ रहें।"
+
+  utter_ask_symptoms:
+    - text: "Please describe your symptoms."
+    - text: "कृपया अपने लक्षणों का वर्णन करें।"
+
+  utter_emergency:
+    - text: "Call emergency services or visit the nearest hospital immediately!"
+    - text: "आपातकालीन सेवाओं को कॉल करें या निकटतम अस्पताल जाएं!"
+
+actions:
+  - action_check_symptoms
+  - action_language_selection

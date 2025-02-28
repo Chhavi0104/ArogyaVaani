@@ -1,0 +1,32 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - Hello
+    - Hi
+    - Hey
+    - नमस्ते
+    - हेलो
+    - राम राम
+
+- intent: goodbye
+  examples: |
+    - Bye
+    - Goodbye
+    - See you later
+    - अलविदा
+    - फिर मिलेंगे
+
+- intent: symptom_check
+  examples: |
+    - I have a headache and fever
+    - My throat is hurting
+    - मुझे सिरदर्द और बुखार है
+    - मेरा गला दर्द कर रहा है
+
+- intent: emergency
+  examples: |
+    - I need urgent help
+    - यह आपातकालीन स्थिति है
+    - कृपया मदद करें
