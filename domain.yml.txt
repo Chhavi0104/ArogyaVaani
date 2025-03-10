@@ -1,29 +1,39 @@
-version: "3.1"
+version: "3.0"
 
 intents:
   - greet
-  - goodbye
-  - symptom_check
-  - emergency
-  - language_select
+  - request_report
+  - request_medicines
+  - request_appointment
+  - scan_qr
+
+entities:
+  - language
+
+slots:
+  user_language:
+    type: text
+    initial_value: "en"
+  qr_content:
+    type: text
 
 responses:
   utter_greet:
-    - text: "Hello! How can I assist you today?"
-    - text: "नमस्ते! मैं आपकी कैसे मदद कर सकता हूँ?"
+    - language: en
+      text: "Hello! How can I assist you today?"
+    - language: hi
+      text: "नमस्ते! मैं आपकी कैसे मदद कर सकता हूँ?"
+    - language: ta
+      text: "வணக்கம்! உங்களுக்கு எவ்வாறு உதவலாம்?"
+    - language: te
+      text: "నమస్కారం! మీకు ఏవిధంగా సహాయపడగలను?"
 
-  utter_goodbye:
-    - text: "Take care! Stay healthy."
-    - text: "ध्यान रखें! स्वस्थ रहें।"
-
-  utter_ask_symptoms:
-    - text: "Please describe your symptoms."
-    - text: "कृपया अपने लक्षणों का वर्णन करें।"
-
-  utter_emergency:
-    - text: "Call emergency services or visit the nearest hospital immediately!"
-    - text: "आपातकालीन सेवाओं को कॉल करें या निकटतम अस्पताल जाएं!"
-
-actions:
-  - action_check_symptoms
-  - action_language_selection
+  utter_not_found:
+    - language: en
+      text: "Data not found"
+    - language: hi
+      text: "डेटा नहीं मिला"
+    - language: ta
+      text: "தரவு கிடைக்கவில்லை"
+    - language: te
+      text: "డేటా దొరకలేదు"
