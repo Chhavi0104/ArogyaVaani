@@ -1,0 +1,39 @@
+version: "3.0"
+
+intents:
+  - greet
+  - request_report
+  - request_medicines
+  - request_appointment
+  - scan_qr
+
+entities:
+  - language
+
+slots:
+  user_language:
+    type: text
+    initial_value: "en"
+  qr_content:
+    type: text
+
+responses:
+  utter_greet:
+    - language: en
+      text: "Hello! How can I assist you today?"
+    - language: hi
+      text: "नमस्ते! मैं आपकी कैसे मदद कर सकता हूँ?"
+    - language: ta
+      text: "வணக்கம்! உங்களுக்கு எவ்வாறு உதவலாம்?"
+    - language: te
+      text: "నమస్కారం! మీకు ఏవిధంగా సహాయపడగలను?"
+
+  utter_not_found:
+    - language: en
+      text: "Data not found"
+    - language: hi
+      text: "डेटा नहीं मिला"
+    - language: ta
+      text: "தரவு கிடைக்கவில்லை"
+    - language: te
+      text: "డేటా దొరకలేదు"
