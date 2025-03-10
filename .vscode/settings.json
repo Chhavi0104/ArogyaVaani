@@ -1,0 +1,15 @@
+{
+  "python.defaultInterpreterPath": "venv/bin/python",
+  "python.linting.enabled": true,
+  "python.autoComplete.extraPaths": ["./actions", "./data"],
+  "files.encoding": "utf8",
+  "terminal.integrated.env.osx": {
+    "PYTHONPATH": "${workspaceFolder}"
+  },
+  "terminal.integrated.env.linux": {
+    "PYTHONPATH": "${workspaceFolder}"
+  },
+  "terminal.integrated.env.windows": {
+    "PYTHONPATH": "${workspaceFolder}"
+  }
+}
