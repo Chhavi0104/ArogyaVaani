@@ -1,0 +1,29 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Train Model",
+      "type": "python",
+      "request": "launch",
+      "module": "rasa",
+      "args": ["train"],
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Run Chatbot",
+      "type": "python",
+      "request": "launch",
+      "module": "rasa",
+      "args": ["shell"],
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Run Action Server",
+      "type": "python",
+      "request": "launch",
+      "module": "rasa",
+      "args": ["run", "actions", "--port", "5055"],
+      "console": "integratedTerminal"
+    }
+  ]
+}
