@@ -18,32 +18,18 @@ slots:
     type: text
 
 responses:
+  # Greeting with dynamic language support
   utter_greet:
-    - language: en
-      text: "Hello! How can I assist you today?"
-    - language: hi
-      text: "नमस्ते! मैं आपकी कैसे मदद कर सकता हूँ?"
-    - language: ta
-      text: "வணக்கம்! உங்களுக்கு எவ்வாறு உதவலாம்?"
-    - language: te
-      text: "నమస్కారం! మీకు ఏవిధంగా సహాయపడగలను?"
+    - text: "{greeting}"  # Populated from language files
 
-  utter_not_found:
-    - language: en
-      text: "Data not found"
-    - language: hi
-      text: "डेटा नहीं मिला"
-    - language: ta
-      text: "தரவு கிடைக்கவில்லை"
-    - language: te
-      text: "డేటా దొరకలేదు"
-
+  # Fallback response
   utter_please_rephrase:
-    - language: en
-      text: "Could you please rephrase that?"
-    - language: hi
-      text: "कृपया फिर से बताएं?"
-    - language: ta
-      text: "தயவு செய்து மீண்டும் கூறவும்"
-    - language: te
-      text: "దయచేసి మళ్లీ చెప్పండి"
+    - text: "{please_rephrase}"  
+
+  # Data not found response
+  utter_not_found:
+    - text: "{not_found}"  
+
+actions:
+  - action_scan_qr
+  - action_fetch_health_data
