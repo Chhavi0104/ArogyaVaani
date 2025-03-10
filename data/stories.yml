@@ -1,0 +1,14 @@
+version: "3.0"
+
+stories:
+  - story: QR-based report retrieval
+    steps:
+      - intent: scan_qr
+      - action: action_scan_qr
+      - intent: request_report
+      - action: action_fetch_health_data
+
+  - story: Direct report request
+    steps:
+      - intent: request_report
+      - action: action_fetch_health_data
