@@ -33,24 +33,36 @@ Healthcare accessibility in rural areas is often limited by **language barriers,
 ## **Repository Structure**  
 ```bash
 ArogyaVaani/
-├── data/
-│   ├── nlu.yml               # Training data for chatbot understanding
-│   ├── stories.yml           # Conversation flow examples
-│   ├── rules.yml             # Rule-based chatbot responses
 ├── actions/
-│   ├── actions.py            # Custom chatbot actions (e.g., fetching health data)
-├── models/                   # Stores trained Rasa models (empty initially)
-├── domain.yml                # Defines chatbot responses, intents, and entities
-├── config.yml                # Configuration for chatbot training
-├── credentials.yml           # API keys and authentication settings
-├── endpoints.yml             # API endpoints for chatbot integration
-├── README.md                 # Project documentation
+│   ├── __init__.py          # Empty package initializer
+│   └── actions.py           # Custom actions for QR scanning and data fetching
+├── data/
+│   ├── __init__.py          # Empty package initializer
+│   ├── nlu.yml              # Training data for intents/entities
+│   ├── stories.yml          # Conversation flow scenarios
+│   ├── rules.yml            # Rule-based interactions
+│   ├── domain.yml           # Bot responses and configuration
+│   └── medicine_data.json   # Mock medical records (multilingual)
+├── languages/
+│   ├── __init__.py          # Empty package initializer
+│   ├── en.json              # English responses
+│   ├── hi.json              # Hindi responses
+│   ├── ta.json              # Tamil responses
+│   └── te.json              # Telugu responses
+├── models/                  # Trained Rasa models (generated after training)
+├── .vscode/
+│   ├── settings.json        # VS Code Python settings
+│   └── launch.json          # VS Code debug configurations
+├── config.yml               # Rasa NLP pipeline configuration
+├── endpoints.yml            # Action server endpoint configuration
+├── requirements.txt         # Python dependencies
+└── README.md                # Project documentation 
 ```
 
 ## **Getting Started**  
 ### **1. Clone the Repository**  
 ```bash
-git clone https://github.com/yourusername/ArogyaVaani.git
+git clone https://github.com/Chhavi0104/ArogyaVaani.git
 cd ArogyaVaani
 ```
 
