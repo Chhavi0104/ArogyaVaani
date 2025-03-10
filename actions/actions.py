@@ -4,6 +4,21 @@ from pyzbar.pyzbar import decode
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet
+import speech_recognition as sr
+
+class SpeechToText(Action):
+    def name(self):
+        return "action_speech_to_text"
+
+    def run(self, dispatcher, tracker, domain):
+        r = sr.Recognizer()
+        with sr.Microphone() as source:
+            audio = r.listen(source)
+        try:
+            text = r.recognize_google(audio, language='hi-IN')
+            return [SlotSet("user_input", text)]
+        except:
+            return [SlotSet("user_input", "")]
 
 class ScanQRCode(Action):
     """Scans QR code and detects language"""
