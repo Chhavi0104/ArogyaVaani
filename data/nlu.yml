@@ -25,8 +25,34 @@ nlu:
     - मुझे सिरदर्द और बुखार है
     - मेरा गला दर्द कर रहा है
 
+- intent: request_report
+  examples: |
+    - Show my medical report
+    - என் மருத்துவ அறிக்கையைக் காண்பி
+    - मेरी रिपोर्ट दिखाओ
+    - నా వైద్య నివేదికను చూపించు
+
+- intent: request_medicines
+  examples: |
+    - What medicines were prescribed?
+    - எனக்கு கொடுக்கப்பட்ட மாத்திரைகள் என்ன?
+    - मुझे कौन सी दवाएं मिली हैं?
+    - నాకు ఏ మాధులు సూచించబడ్డాయి?
+
+- intent: request_appointment
+  examples: |
+    - When is my next appointment?
+    - என் அடுத்த நியுனர் எப்போது?
+    - मेरा अगला अपॉइंटमेंट कब है?
+    - నా తదుపరి అప్పాయింట్మెంట్ ఎప్పుడు?
+
 - intent: emergency
   examples: |
     - I need urgent help
     - यह आपातकालीन स्थिति है
     - कृपया मदद करें
+
+- intent: scan_qr
+  examples: |
+    - Scan QR code
+    - Scan code
