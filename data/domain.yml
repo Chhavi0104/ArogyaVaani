@@ -37,3 +37,13 @@ responses:
       text: "தரவு கிடைக்கவில்லை"
     - language: te
       text: "డేటా దొరకలేదు"
+
+  utter_please_rephrase:
+    - language: en
+      text: "Could you please rephrase that?"
+    - language: hi
+      text: "कृपया फिर से बताएं?"
+    - language: ta
+      text: "தயவு செய்து மீண்டும் கூறவும்"
+    - language: te
+      text: "దయచేసి మళ్లీ చెప్పండి"
