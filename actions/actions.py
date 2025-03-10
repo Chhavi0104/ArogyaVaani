@@ -1,73 +1,66 @@
-# Import necessary libraries
-import pyqrcode  
-import firebase_admin  
-from firebase_admin import credentials, firestore  
-import whisper  
-from rasa_nlu.model import Interpreter  
+import json
+import cv2
+from pyzbar.pyzbar import decode
+from rasa_sdk import Action, Tracker
+from rasa_sdk.executor import CollectingDispatcher
+from rasa_sdk.events import SlotSet
 
-# Initialize Firebase
-cred = credentials.Certificate("serviceAccountKey.json")  
-firebase_admin.initialize_app(cred)  
-db = firestore.client()  
+class ScanQRCode(Action):
+    """Scans QR code and detects language"""
+    def name(self):
+        return "action_scan_qr"
 
-# Load AI models (Chatbot & Speech-to-Text)
-whisper_model = whisper.load_model("base")  
-chatbot = Interpreter.load("models/current_rasa_model")  # Load Rasa chatbot model  
+    def run(self, dispatcher, tracker, domain):
+        cap = cv2.VideoCapture(0)
+        qr_content = None
+        lang = 'en'
+        
+        while True:
+            ret, frame = cap.read()
+            decoded = decode(frame)
+            
+            if decoded:
+                qr_content = decoded[0].data.decode('utf-8')
+                # Detect language from QR content (basic script detection)
+                if any('\u0900' <= c <= '\u097F' for c in qr_content):  # Hindi
+                    lang = 'hi'
+                elif any('\u0B80' <= c <= '\u0BFF' for c in qr_content):  # Tamil
+                    lang = 'ta'
+                elif any('\u0C00' <= c <= '\u0C7F' for c in qr_content):  # Telugu
+                    lang = 'te'
+                break
+                
+            cv2.imshow('QR Scanner', frame)
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
+                
+        cap.release()
+        cv2.destroyAllWindows()
+        return [SlotSet("qr_content", qr_content), SlotSet("user_language", lang)]
 
-# Generate a QR Code for Patient's Health Records
-def generate_qr(patient_id):  
-    """
-    Generates a QR Code that links to the patient's encrypted medical record.
-    """
-    qr_data = f"https://healthsync.com/patient/{patient_id}"  
-    qr = pyqrcode.create(qr_data)  
-    qr.png(f"{patient_id}_qr.png", scale=8)  
-    return f"{patient_id}_qr.png"  
+class FetchHealthData(Action):
+    """Fetches medical data based on user language"""
+    def name(self):
+        return "action_fetch_health_data"
 
-# Fetch Patient Medical Data from Firebase
-def get_patient_data(patient_id):  
-    """
-    Retrieves the patient's health data securely from Firebase.
-    """
-    doc_ref = db.collection("patients").document(patient_id)  
-    doc = doc_ref.get()  
-    return doc.to_dict() if doc.exists else {"error": "Patient record not found"}  
-
-# Process Patient Queries with Vernacular Chatbot
-def process_chatbot_query(user_input):  
-    """
-    Takes user input (text) and generates a response in the user's language.
-    """
-    response = chatbot.parse(user_input)  
-    return response["text"]  # Returns chatbot-generated response  
-
-# Convert Speech-to-Text (For Voice-Based Queries)
-def transcribe_audio(file_path):  
-    """
-    Converts an audio file (patient's voice) into text for chatbot processing.
-    """
-    result = whisper_model.transcribe(file_path)  
-    return result["text"]  # Extract transcribed text  
-
-# Complete Workflow - Process Patient Request
-def handle_patient_interaction(patient_id, user_input=None, audio_file=None):  
-    """
-    Manages the complete interaction:
-    - Fetch patient data
-    - Process chatbot query (text or voice)
-    - Return response in local language
-    """
-    patient_data = get_patient_data(patient_id)  
-
-    if "error" in patient_data:  
-        return patient_data["error"]  # Return error if patient not found  
-
-    if audio_file:  
-        user_input = transcribe_audio(audio_file)  # Convert speech to text  
-
-    chatbot_response = process_chatbot_query(user_input)  
-    return chatbot_response  # Return chatbot’s response  
-
-# Example Usage:
-# patient_id = "123456"
-# print(handle_patient_interaction(patient_id, user_input="Show my last diagnosis"))
+    def run(self, dispatcher, tracker, domain):
+        user_lang = tracker.get_slot("user_language")
+        user_id = tracker.get_slot("qr_content")
+        
+        # Load mock medical data
+        with open("data/medicine_data.json", encoding='utf-8') as f:
+            data = json.load(f)
+            
+        user_data = data.get(user_lang, {}).get(user_id, {})
+        
+        if not user_data:
+            dispatcher.utter_message(template=f"utter_not_found_{user_lang}")
+            return []
+            
+        response = (
+            f"📄 {user_data['report']}\n"
+            f"💊 {user_data['medicines']}\n"
+            f"📅 {user_data['appointment']}"
+        )
+        dispatcher.utter_message(text=response)
+        return []
