@@ -95,3 +95,13 @@ class FetchHealthData(Action):
         
         dispatcher.utter_message(text=response)
         return []
+
+# Update medicine_data.json to use MongoDB
+from pymongo import MongoClient
+
+client = MongoClient("mongodb://localhost:27017/")
+db = client["aroygavaani"]
+patients = db["patients"]
+
+# In FetchHealthData action:
+user_data = patients.find_one({"patient_id": user_id, "language": user_lang})
