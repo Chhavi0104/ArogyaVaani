@@ -2,6 +2,11 @@
 action_endpoint:
   url: "http://localhost:5055/webhook"  
 
+# nlg configuration
+nlg:
+  url: "http://localhost:5002/nlg"
+  port: 5002
+  
 # Event Broker Configuration 
 event_broker:
   url: "localhost"
