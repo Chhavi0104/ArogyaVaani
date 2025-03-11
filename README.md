@@ -49,6 +49,10 @@ ArogyaVaani/
 │   ├── hi.json              # Hindi responses
 │   ├── ta.json              # Tamil responses
 │   └── te.json              # Telugu responses
+├── nlg/                    
+│   ├── __init__.py
+│   ├── server.py            # NLG server implementation
+│   └── requirements.txt     # NLG dependencies
 ├── models/                  # Trained Rasa models (generated after training)
 ├── .vscode/
 │   ├── settings.json        # VS Code Python settings
