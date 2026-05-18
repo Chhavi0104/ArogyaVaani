@@ -1,0 +1,8 @@
+{
+  "greeting": "Hello! How can I assist you today?",
+  "not_found": "Data not found",
+  "please_rephrase": "Could you please rephrase that?",
+  "report": "Your medical report:",
+  "medicines": "Prescribed medicines:",
+  "appointment": "Next appointment:"
+}

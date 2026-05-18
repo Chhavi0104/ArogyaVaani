@@ -1,0 +1,27 @@
+version: "3.0"
+
+rules:
+  - rule: QR scan initiation
+    steps:
+      - intent: scan_qr
+      - action: action_scan_qr
+
+  - rule: Handle report requests
+    steps:
+      - intent: request_report
+      - action: action_fetch_health_data
+
+  - rule: Handle medicine list requests
+    steps:
+      - intent: request_medicines
+      - action: action_fetch_health_data
+
+  - rule: Handle appointment requests
+    steps:
+      - intent: request_appointment
+      - action: action_fetch_health_data
+
+  - rule: Fallback rule
+    steps:
+      - intent: nlu_fallback
+      - action: utter_please_rephrase
