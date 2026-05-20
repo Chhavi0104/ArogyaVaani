@@ -1,3 +1,24 @@
+@import url('https://googleapis.com');
+
+.playfair-display-heading {
+  font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 750;
+  font-style: normal;
+}
+
+.poppins-regular-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.poppins-light {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
 .main {
     display: flex;
     flex-direction: column;
@@ -42,6 +63,7 @@
     height: 100px;
     text-align: center;
     font-size: 10px;
+    font-family: 'Poppins Light'
 }
 
 h1 {
@@ -51,7 +73,9 @@ h1 {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  padding-top: 70px
+  padding-top: 70px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700
 }
 
 form {
@@ -65,7 +89,9 @@ input {
     height: 30px;
     border-radius: 7px;
     background: linear-gradient(79deg, #4F959D, #98D2C0, #F6F8D5);
-    border: none
+    border: none;
+    box-shadow: 10px 15px 12px rgba(0, 0, 0, 0.2);
+    font-family: 'Poppins'
 }
 
 input[type='submit'] {
