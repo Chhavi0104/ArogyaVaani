@@ -24,6 +24,9 @@ body {
     min-height: 100vh;
     
 }
+a{
+    color: #4F959D;
+}
 h1 {
     font-size: 45px;
     text-align: center;
@@ -144,6 +147,7 @@ input[type='submit']:hover {
     h1 {
         font-size: 52px;
     }
+   
 }
 @media screen and (max-height: 800px) {
     h1 {
